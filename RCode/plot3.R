@@ -1,0 +1,11 @@
+data1 <- read.csv("C:/Users/JeetsPC-1/Desktop/Study Material/R DataSets/household_power_consumption.txt", header=TRUE, sep=";")
+data1$Date=dmy(data1$Date)
+data<-data1[(data1$Date >= "2007-02-01") & (data1$Date <= "2007-02-02"),]
+data$Moment=as.POSIXct(paste(data$Date, data$Time), format="%Y-%m-%d %H:%M:%S")
+data$Sub_metering_1=as.numeric(data$Sub_metering_1)
+data$Sub_metering_2=as.numeric(data$Sub_metering_2)
+data$Sub_metering_3=as.numeric(data$Sub_metering_3)
+plot(data$Moment,data$Sub_metering_1,type = "l",lty=1,ylab="Energy Sub Metering")
+lines(data$Moment,data$Sub_metering_2,type="l",lty=1,col="red")
+lines(data$Moment,data$Sub_metering_3,type = "l",lty=1,col="blue")
+legend("topright",legend = c("Sub_metering_1","Sub_metering_2","Sub_metering_3"),col = c("black","red","blue"),lty=1,cex = 0.8)
